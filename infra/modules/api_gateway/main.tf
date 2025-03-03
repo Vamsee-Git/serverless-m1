@@ -31,3 +31,18 @@ resource "aws_lambda_permission" "this" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.this.execution_arn}/*/${var.http_method}/${var.resource_path}"
 }
+# Add Stage to the API Gateway
+resource "aws_api_gateway_stage" "this" {
+  stage_name    = var.stage_name  # e.g., "dev" or "prod"
+  rest_api_id   = aws_api_gateway_rest_api.this.id
+  deployment_id = aws_api_gateway_deployment.this.id  # Reference to the deployment
+}
+ 
+# Create a deployment resource
+resource "aws_api_gateway_deployment" "this" {
+  rest_api_id = aws_api_gateway_rest_api.this.id
+  depends_on  = [
+    aws_api_gateway_integration.this,   # Make sure integration is created first
+    aws_api_gateway_method.this         # Make sure method is created first
+  ]
+}
