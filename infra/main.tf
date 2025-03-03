@@ -42,4 +42,5 @@ module "api_gateway" {
   lambda_invoke_arn = module.lambda_get_data.invoke_arn
   resource_path = "users"
   http_method = "GET"
+  stage       = "dev"
 }
