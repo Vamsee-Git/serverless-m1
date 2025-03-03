@@ -31,7 +31,7 @@ resource "aws_lambda_function" "this" {
     variables = var.environment_variables
   }
 
-  filename = var.lambda_zip # Replace with your Lambda code
+  filename = var.zip_file # Replace with your Lambda code
 }
 
 output "function_name" {
