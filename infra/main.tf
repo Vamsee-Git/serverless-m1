@@ -7,7 +7,7 @@ module "dynamodb" {
   table_name = var.table_name
 }
 
-# Lambda function to insert data into DynamoDB
+# Lambda function to insert data into DynamoDB.
 module "lambda_add_data" {
   source = "./modules/lambda"
   function_name = "lambda-write-data"
