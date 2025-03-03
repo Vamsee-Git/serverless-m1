@@ -31,11 +31,31 @@ resource "aws_lambda_permission" "this" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.this.execution_arn}/*/${var.http_method}/${var.resource_path}"
 }
+resource "aws_cloudwatch_log_group" "api_gw_logs" {
+  name = "/aws/api-gateway/getUsersAPI"
+}
+
 # Add Stage to the API Gateway
 resource "aws_api_gateway_stage" "this" {
   stage_name    = var.stage_name  # e.g., "dev" or "prod"
   rest_api_id   = aws_api_gateway_rest_api.this.id
   deployment_id = aws_api_gateway_deployment.this.id  # Reference to the deployment
+
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.api_gw_logs.arn
+    format          = jsonencode({
+      requestId       = "$context.requestId"
+      ip              = "$context.identity.sourceIp"
+      caller          = "$context.identity.caller"
+      user            = "$context.identity.user"
+      requestTime     = "$context.requestTime"
+      httpMethod      = "$context.httpMethod"
+      resourcePath    = "$context.resourcePath"
+      status          = "$context.status"
+      protocol        = "$context.protocol"
+      responseLength  = "$context.responseLength"
+    })
+  }
 }
  
 # Create a deployment resource
@@ -45,4 +65,7 @@ resource "aws_api_gateway_deployment" "this" {
     aws_api_gateway_integration.this,   # Make sure integration is created first
     aws_api_gateway_method.this         # Make sure method is created first
   ]
+}
+resource "aws_api_gateway_account" "account" {
+  cloudwatch_role_arn = var.api_gateway_cloudwatch_role_arn
 }
