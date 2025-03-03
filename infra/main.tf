@@ -25,7 +25,7 @@ module "lambda_add_data" {
 module "lambda_get_data" {
   source = "./modules/lambda"
   function_name = "lambda-read-data"
-  zip_file      = "lambda_read.zip"
+  lambda_zip      = "lambda_read.zip"
   runtime = "python3.10"
   handler = "lambda_read.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess"]
