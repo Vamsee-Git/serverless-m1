@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "this" {
-  name = "sample-api"
+  name = "get-data-api"
 }
 
 resource "aws_api_gateway_resource" "this" {
