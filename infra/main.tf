@@ -11,7 +11,7 @@ module "dynamodb" {
 module "lambda_add_data" {
   source = "./modules/lambda"
   function_name = "lambda-write-data"
-  zip_file      = "lambda_add.zip"
+  lambda_zip      = "lambda_add.zip"
   runtime = "python3.10"
   handler = "lambda_add.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
