@@ -11,9 +11,9 @@ module "dynamodb" {
 module "lambda_add_data" {
   source = "./modules/lambda"
   function_name = "lambda-write-data"
-  zip_file      = "lambda_function_payload.zip"
+  zip_file      = "lambda_add.zip"
   runtime = "python3.10"
-  handler = "function1.lambda_handler"
+  handler = "lambda_add.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
   depends_on = [module.dynamodb]
   environment_variables = {
@@ -25,9 +25,9 @@ module "lambda_add_data" {
 module "lambda_get_data" {
   source = "./modules/lambda"
   function_name = "lambda-read-data"
-  zip_file      = "lambda_function_payload.zip"
+  zip_file      = "lambda_read.zip"
   runtime = "python3.10"
-  handler = "function2.lambda_handler"
+  handler = "lambda_read.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess"]
   depends_on = [module.dynamodb]
   environment_variables = {
