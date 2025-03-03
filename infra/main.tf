@@ -30,6 +30,7 @@ module "lambda_get_data" {
   runtime = "python3.10"
   handler = "lambda_read.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess"]
+  role_log_policy_arns = ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"]
   depends_on = [module.dynamodb]
   environment_variables = {
     DYNAMODB_TABLE = module.dynamodb.table_name
