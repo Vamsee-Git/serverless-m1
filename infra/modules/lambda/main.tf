@@ -33,6 +33,14 @@ resource "aws_lambda_function" "this" {
 
   filename = var.zip_file # Replace with your Lambda code
 }
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name              = "/aws/lambda/${var.function_name}"
+  retention_in_days = 7  # Set log retention period
+ 
+  tags = {
+    Environment = "dev"
+  }
+}
 
 output "function_name" {
   value = aws_lambda_function.this.function_name
