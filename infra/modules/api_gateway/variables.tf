@@ -18,11 +18,6 @@ variable "lambda_function_name" {
   type        = string
 }
 
-variable "api_gateway_cloudwatch_role_arn" {
-  description = "The ARN of the IAM role for API Gateway CloudWatch logging"
-  type        = string
-}
-
 variable "stage_name" {
   description = "The name of the stage (e.g., dev, prod)."
   type        = string
