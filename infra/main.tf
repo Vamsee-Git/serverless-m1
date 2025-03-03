@@ -2,15 +2,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "sneha-terraform-bucket-us-west-2"
-    key            = "usecase6/terraform.tfstate"
-    region         = "us-west-2"
-    encrypt        = true
-  }
-}
-
 module "dynamodb" {
   source = "./modules/dynamodb"
   table_name = var.table_name
