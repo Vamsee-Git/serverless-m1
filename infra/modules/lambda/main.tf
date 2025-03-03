@@ -27,12 +27,20 @@ resource "aws_iam_role_policy_attachment" "lambda_log_policy" {
   policy_arn = each.value
 }
 
+resource "aws_iam_role_policy_attachment" "lambda_XRAY_policy" {
+  for_each = toset(var.role_XRAY_policy_arns)
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = each.value
+}
+
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
   runtime       = var.runtime
   handler       = var.handler
   role          = aws_iam_role.lambda_exec.arn
-
+  tracing_config {
+    mode = "Active"  
+  }
   environment {
     variables = var.environment_variables
   }
