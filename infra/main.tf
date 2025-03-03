@@ -10,7 +10,7 @@ module "dynamodb" {
 # Lambda function to insert data into DynamoDB
 module "lambda_add_data" {
   source = "./modules/lambda"
-  function_name = "m1-add-sample-data"
+  function_name = "lambda-add-data"
   zip_file      = "lambda_function_payload.zip"
   runtime = "python3.10"
   handler = "function1.lambda_handler"
