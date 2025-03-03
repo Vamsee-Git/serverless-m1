@@ -1,3 +1,3 @@
-aws_region = "us-west-2"
-table_name = "serverless_workshop_intro1"
+aws_region = "us-east-1"
+table_name = "data_table"
 environment = "dev"
