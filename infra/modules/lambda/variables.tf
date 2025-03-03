@@ -29,7 +29,3 @@ variable "environment_variables" {
   type        = map(string)
   default     = {}
 }
-variable "zip_file" {
-  description = "lambda zip file"
-  type       = string
-}
