@@ -31,4 +31,5 @@ variable "environment_variables" {
 }
 variable "lambda_zip" {
   description = "lambda zip file"
-  type       = string   
+  type       = string
+}
