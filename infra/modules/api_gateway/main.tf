@@ -40,7 +40,10 @@ resource "aws_api_gateway_stage" "this" {
   stage_name    = var.stage_name  # e.g., "dev" or "prod"
   rest_api_id   = aws_api_gateway_rest_api.this.id
   deployment_id = aws_api_gateway_deployment.this.id  # Reference to the deployment
-  cloudwatch_role_arn = aws_iam_role.cloudwatch_logs_role.arn
+
+  lifecycle {
+    ignore_changes = [deployment_id]  # Ignore changes to deployment_id (if stage already exists)
+  }
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_gw_logs.arn
