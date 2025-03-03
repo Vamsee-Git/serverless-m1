@@ -16,6 +16,7 @@ module "lambda_add_data" {
   handler = "lambda_add.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
   role_log_policy_arns = ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"]
+  role_XRAY_policy_arns = ["arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"]
   depends_on = [module.dynamodb]
   environment_variables = {
     DYNAMODB_TABLE = module.dynamodb.table_name
@@ -31,6 +32,7 @@ module "lambda_get_data" {
   handler = "lambda_read.lambda_handler"
   role_policy_arns = ["arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess"]
   role_log_policy_arns = ["arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"]
+  role_XRAY_policy_arns = ["arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"]
   depends_on = [module.dynamodb]
   environment_variables = {
     DYNAMODB_TABLE = module.dynamodb.table_name
