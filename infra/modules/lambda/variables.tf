@@ -29,6 +29,11 @@ variable "role_log_policy_arns" {
   type        = list(string)
 }
 
+variable "role_XRAY_policy_arns" {
+  description = "List of IAM policy ARNs to attach to the Lambda execution role"
+  type        = list(string)
+}
+
 variable "environment_variables" {
   description = "Environment variables to pass to the Lambda function"
   type        = map(string)
