@@ -10,7 +10,7 @@ module "dynamodb" {
 # Lambda function to insert data into DynamoDB
 module "lambda_add_data" {
   source = "./modules/lambda"
-  function_name = "lambda-add-data"
+  function_name = "lambda-write-data"
   zip_file      = "lambda_function_payload.zip"
   runtime = "python3.10"
   handler = "function1.lambda_handler"
@@ -24,7 +24,7 @@ module "lambda_add_data" {
 # Lambda function to retrieve data from DynamoDB
 module "lambda_get_data" {
   source = "./modules/lambda"
-  function_name = "get-users-1"
+  function_name = "lambda-read-data"
   zip_file      = "lambda_function_payload.zip"
   runtime = "python3.10"
   handler = "function2.lambda_handler"
